@@ -4,15 +4,33 @@
   justify-items: center;
   margin: auto;
   display: flex;
+  flex-direction: row;
   align-items: center;
+  width: 100vw;
+  overflow: scroll;
+  /* overflow-x: scroll;
+  grid-row: auto; */
   /* display: inline-block; */
 }
 .weather-card {
   /* justify-content: center; */
-  padding: 5%;
+  /* padding: 5%; */
+  padding: 1vw;
   background-color: honeydew;
   border-radius: 5%;
   margin: 2%;
+  font-size: 100%;
+  min-width: 12vw;
+  height: fit-content;
+  /* text-align: start; */
+}
+.info {
+  text-align: start;
+}
+.weather-card h3 {
+  margin: 0;
+  font-size: 100%;
+  padding: 0;
 }
 .weather-display {
   margin: 0%;

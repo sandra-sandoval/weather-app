@@ -30,19 +30,21 @@ export function DisplayForecast({ forecast }, { aqi }) {
             <h3>{day.date}</h3>
             {/* <p>Max temp: {day.day.maxtemp_f}</p>
            <p>Min temp: {day.day.mintemp_f}</p> */}
-            <p>Avg temp: {day.day.avgtemp_f}</p>
-            <p>Condition: {day.day.condition.text} </p>
-            <p>Chance of rain: {day.day.daily_chance_of_rain}%</p>
-            {aqi === "yes" && day.day.air_quality && (
-              <div id="Air Quality">
-                <p>Air Quality: </p>
-                <ul>
-                  <li>US EPA Index: {day.day.air_quality["us-epa-index"]}</li>
-                  <li> PM2.5: {day.day.air_quality.pm2_5}</li>
-                  <li>O3: {day.day.air_quality.o3}</li>
-                </ul>
-              </div>
-            )}
+            <div className="info">
+              <p>Avg temp: {day.day.avgtemp_f}</p>
+              <p>Condition: {day.day.condition.text} </p>
+              <p>Chance of rain: {day.day.daily_chance_of_rain}%</p>
+              {aqi === "yes" && day.day.air_quality && (
+                <div id="Air Quality">
+                  <p>Air Quality: </p>
+                  <ul>
+                    <li>US EPA Index: {day.day.air_quality["us-epa-index"]}</li>
+                    <li> PM2.5: {day.day.air_quality.pm2_5}</li>
+                    <li>O3: {day.day.air_quality.o3}</li>
+                  </ul>
+                </div>
+              )}
+            </div>
           </section>
         ))}
       </div>

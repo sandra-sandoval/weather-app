@@ -56,60 +56,61 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1>Weather App</h1>
-        <p>Plan ahead with the Weather App!</p>
-      </header>
-      <div className="user-input">
-        <input
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          placeholder="Enter City name"
-        />
-        <div id="mode-container">
-          <button
-            className={
-              mode === "weather" ? "mode-button-selected" : "mode-button"
-            }
-            onClick={() => setMode("weather")}
-          >
-            {" "}
-            Weather
-          </button>
-          <button
-            className={
-              mode === "forecast" ? "mode-button-selected" : "mode-button"
-            }
-            onClick={() => setMode("forecast")}
-          >
-            Forecast
-          </button>
+        <div className="head-container">
+          <h1>Weather App</h1>
+          <p>Plan ahead with the Weather App!</p>
         </div>
-        <div id="select-container">
-          <div className="select-component">
-            <p>Air Quality</p>
-            <select id="aqi" onChange={(e) => setAqi(e.target.value)}>
-              <option value="select">Select</option>
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
+        <div className="user-input">
+          <input
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            placeholder="Enter City name"
+          />
+          <div id="mode-container">
+            <button
+              className={
+                mode === "weather" ? "mode-button-selected" : "mode-button"
+              }
+              onClick={() => setMode("weather")}
+            >
+              Today
+            </button>
+            <button
+              className={
+                mode === "forecast" ? "mode-button-selected" : "mode-button"
+              }
+              onClick={() => setMode("forecast")}
+            >
+              Forecast
+            </button>
           </div>
-          {mode === "forecast" && (
+          <div id="select-container">
             <div className="select-component">
-              <p>Days</p>
-              <select id="days" onChange={(e) => setDays(e.target.value)}>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
+              <p>Air Quality</p>
+              <select id="aqi" onChange={(e) => setAqi(e.target.value)}>
+                <option value="select">Select</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
               </select>
             </div>
-          )}
+            {mode === "forecast" && (
+              <div className="select-component">
+                <p>Days</p>
+                <select id="days" onChange={(e) => setDays(e.target.value)}>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                </select>
+              </div>
+            )}
+          </div>
+          <button id="submit-button" onClick={handleFetch}>
+            Get Info
+          </button>
         </div>
-        <button id="submit-button" onClick={handleFetch}>
-          Get Info
-        </button>
-      </div>
+      </header>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
       {mode === "forecast" &&
