@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./forecast.css";
 
-export async function FetchForecast(city, degree, days) {
+export async function FetchForecast(city, days) {
   console.log("city: " + city);
   const res = await fetch(
     "/forecast?city=" + city + "&aqi=no" + "&days=" + days

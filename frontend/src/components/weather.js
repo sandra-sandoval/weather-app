@@ -4,7 +4,6 @@ import "./weather.css";
 export async function FetchWeather(city, aqi) {
   console.log("city: " + city);
   const res = await fetch("/weather?city=" + city + "&aqi=" + aqi);
-  // const res = await fetch("/mock-weather");
   const data = await res.json();
   if (data.error) throw new Error(data.error);
   return data;
