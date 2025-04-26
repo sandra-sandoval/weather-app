@@ -8,15 +8,15 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [error, setError] = useState("");
   const [mode, setMode] = useState("weather");
-  const [aqi, setAqi] = useState("yes");
+  const [aqi, setAqi] = useState("no");
   const [days, setDays] = useState("3");
+  const [degree, setDegree] = useState("F");
 
   const handleWeather = async () => {
     try {
       const data = await FetchWeather(city, aqi);
       setWeather(data);
       setError("");
-      // displayWeather({ city });
     } catch (err) {
       setError(err.message);
       setWeather(null);
@@ -57,15 +57,42 @@ function App() {
     <div className="App">
       <header>
         <div className="head-container">
-          <h1>Weather App</h1>
+          <h1> 🌤️ Weather App</h1>
           <p>Plan ahead with the Weather App!</p>
         </div>
         <div className="user-input">
-          <input
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            placeholder="Enter City name"
-          />
+          <div id="search-container">
+            <input
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              placeholder="Enter City name"
+              className="w-full border border-gray-300 rounded-full py-2 px-4 pr-12 focus:outline-none"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  {
+                    handleFetch();
+                  }
+                }
+              }}
+            />
+            <button
+              onClick={handleFetch}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-blue-500 hover:bg-blue-600 text-white"
+              aria-label="Search"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                x="0px"
+                y="0px"
+                width="15"
+                height="15"
+                viewBox="0 0 50 50"
+                fill="black"
+              >
+                <path d="M 21 3 C 11.622998 3 4 10.623005 4 20 C 4 29.376995 11.622998 37 21 37 C 24.712383 37 28.139151 35.791079 30.9375 33.765625 L 44.085938 46.914062 L 46.914062 44.085938 L 33.886719 31.058594 C 36.443536 28.083 38 24.223631 38 20 C 38 10.623005 30.377002 3 21 3 z M 21 5 C 29.296122 5 36 11.703883 36 20 C 36 28.296117 29.296122 35 21 35 C 12.703878 35 6 28.296117 6 20 C 6 11.703883 12.703878 5 21 5 z"></path>
+              </svg>
+            </button>
+          </div>
           <div id="mode-container">
             <button
               className={
@@ -84,40 +111,49 @@ function App() {
               Forecast
             </button>
           </div>
-          <div id="select-container">
+        </div>
+      </header>
+      <main>
+        <div id="select-container">
+          <div className="select-component">
+            <p>Degree</p>
+            <select id="degree" onChange={(e) => setDegree(e.target.value)}>
+              <option value="F">F</option>
+              <option value="C">C</option>
+            </select>
+          </div>
+          {mode === "weather" && (
             <div className="select-component">
               <p>Air Quality</p>
               <select id="aqi" onChange={(e) => setAqi(e.target.value)}>
-                <option value="select">Select</option>
-                <option value="yes">Yes</option>
                 <option value="no">No</option>
+                <option value="yes">Yes</option>
               </select>
             </div>
-            {mode === "forecast" && (
-              <div className="select-component">
-                <p>Days</p>
-                <select id="days" onChange={(e) => setDays(e.target.value)}>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                </select>
-              </div>
-            )}
-          </div>
-          <button id="submit-button" onClick={handleFetch}>
-            Get Info
-          </button>
+          )}
+          {mode === "forecast" && (
+            <div className="select-component">
+              <p>Days</p>
+              <select id="days" onChange={(e) => setDays(e.target.value)}>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+              </select>
+            </div>
+          )}
         </div>
-      </header>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        {mode === "forecast" &&
+          forecast &&
+          DisplayForecast({ forecast }, { degree })}
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {mode === "forecast" &&
-        forecast &&
-        DisplayForecast({ forecast }, { aqi })}
-
-      {mode === "weather" && weather && DisplayWeather({ weather }, { aqi })}
+        {mode === "weather" &&
+          weather &&
+          DisplayWeather({ weather }, { aqi }, { degree })}
+      </main>
+      <footer></footer>
     </div>
   );
 }

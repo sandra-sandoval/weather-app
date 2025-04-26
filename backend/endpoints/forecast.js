@@ -6,12 +6,11 @@ const cache = new NodeCache({ stdTTL: 600 });
 
 router.get("/", async (req, res) => {
   const city = req.query.city;
-  const aqi = req.query.aqi || "yes";
   const days = req.query.days || 3;
   if (!city) {
     return res.status(500).send({ error: "Please input valid city." });
   }
-  const cacheKey = city + ", " + days + "" + aqi;
+  const cacheKey = city + ", " + days;
   const cachedData = cache.get(cacheKey);
 
   if (cachedData) {
@@ -27,9 +26,8 @@ router.get("/", async (req, res) => {
         city +
         "&days=" +
         days +
-        "&aqi=" +
-        aqi +
-        "&alerts=yes"
+        "&aqi=no" +
+        "&alerts=no"
     );
 
     cache.set(cacheKey, response.data);

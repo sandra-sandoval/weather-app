@@ -7,7 +7,7 @@ const cache = new NodeCache({ stdTTL: 600 });
 router.get("/", async (req, res) => {
   const city = req.query.city;
   // const days = req.query.days;
-  const aqi = req.query.aqi || "yes";
+  const aqi = req.query.aqi || "no";
   if (!city) {
     return res.status(500).send({ error: "Please input valid city." });
   }

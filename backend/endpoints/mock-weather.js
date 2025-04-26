@@ -1,0 +1,62 @@
+const router = require("./forecast");
+
+router.get("/", (req, res) => {
+  const mockData = {
+    location: {
+      name: "London",
+      region: "City of London, Greater London",
+      country: "United Kingdom",
+      lat: 51.5171,
+      lon: -0.1062,
+      tz_id: "Europe/London",
+      localtime_epoch: 1745191420,
+      localtime: "2025-04-21 00:23",
+    },
+    current: {
+      last_updated_epoch: 1745190900,
+      last_updated: "2025-04-21 00:15",
+      temp_c: 10.2,
+      temp_f: 50.4,
+      is_day: 0,
+      condition: {
+        text: "Overcast",
+        icon: "//cdn.weatherapi.com/weather/64x64/night/122.png",
+        code: 1009,
+      },
+      wind_mph: 4,
+      wind_kph: 6.5,
+      wind_degree: 72,
+      wind_dir: "ENE",
+      pressure_mb: 1007,
+      pressure_in: 29.74,
+      precip_mm: 0,
+      precip_in: 0,
+      humidity: 76,
+      cloud: 100,
+      feelslike_c: 9.6,
+      feelslike_f: 49.2,
+      windchill_c: 8.8,
+      windchill_f: 47.8,
+      heatindex_c: 9.5,
+      heatindex_f: 49.1,
+      dewpoint_c: 7,
+      dewpoint_f: 44.7,
+      vis_km: 10,
+      vis_miles: 6,
+      uv: 0,
+      gust_mph: 5.5,
+      gust_kph: 8.9,
+      air_quality: {
+        co: 321.9,
+        no2: 35.89,
+        o3: 61,
+        so2: 3.515,
+        pm2_5: 25.9,
+        pm10: 33.3,
+        "us-epa-index": 2,
+        "gb-defra-index": 3,
+      },
+    },
+  };
+  res.json(mockData);
+});
